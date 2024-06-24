@@ -10,7 +10,7 @@ import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 const Sidebar = styled.div`
   width: 260px;
   height: 91vh;
-  background-color: #1c3b72;
+  background-color: #947292;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

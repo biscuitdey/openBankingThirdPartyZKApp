@@ -21,7 +21,7 @@ const Title = styled.h2`
 
 const ProofContainer = styled.div`
   position: relative;
-  background-color: rgba(200, 219, 244, 0.9);
+  background-color: rgba(200, 219, 244, 0.8);
   padding: 40px;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
@@ -178,7 +178,7 @@ const VerifyProof: React.FC = () => {
             <Button onClick={handleVerify}>Verify Proof</Button>
           </div>
         ) : (
-          <div>No proof stored</div>
+          <div>No proof received</div>
         )}
       </ProofContainer>
     </BackgroundContainer>
