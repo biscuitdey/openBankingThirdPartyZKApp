@@ -103,22 +103,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             Home
           </NavLink>
         </Link>
-        <Link href="/verify-proof" passHref>
-          <NavLink>
-            <IconWrapper>
-              <CheckOutlinedIcon sx={{ fontSize: 30 }} />
-            </IconWrapper>
-            Verify Proof
-          </NavLink>
-        </Link>
-        <Link href="/stored-proof" passHref>
-          <NavLink>
-            <IconWrapper>
-              <LockOutlinedIcon sx={{ fontSize: 30 }} />
-            </IconWrapper>
-            Stored Proof
-          </NavLink>
-        </Link>
         <LoginIcon>
           <LoginOutlinedIcon />
         </LoginIcon>

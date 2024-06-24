@@ -1,10 +1,10 @@
 import Layout from "../components/Layout";
-import Form from "../components/Form";
+import VerifyProof from "../components/VerifyProof";
 
 const Home: React.FC = () => {
   return (
     <Layout>
-      <Form />
+      <VerifyProof />
     </Layout>
   );
 };

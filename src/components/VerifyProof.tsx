@@ -6,7 +6,7 @@ const BackgroundContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("/form-bg.png") no-repeat center center;
+  background: url("/verify-bg.png") no-repeat center center;
   background-size: cover;
   width: 100%;
   height: 100vh; // or any height you need
@@ -21,10 +21,10 @@ const Title = styled.h2`
 
 const ProofContainer = styled.div`
   position: relative;
-  background-color: rgba(239, 250, 254, 0.8);
+  background-color: rgba(200, 219, 244, 0.9);
   padding: 40px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   width: 450px;
   align-items: center;
 `;
@@ -92,6 +92,7 @@ const LoadingOverlay = styled.div`
 
 const VerifyProof: React.FC = () => {
   const [proof, setProof] = useState<any>(null);
+  const [publicKey, setPublicKey] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [verificationResult, setVerificationResult] = useState<string | null>(
     null
@@ -102,9 +103,10 @@ const VerifyProof: React.FC = () => {
   useEffect(() => {
     async function fetchData() {
       const storedProof = await getItemInLocalStorage("publicWitness");
-      console.log(storedProof);
-      if (typeof storedProof === "string") {
+      const publicKey = await getItemInLocalStorage("publicKey");
+      if (typeof storedProof === "string" && typeof publicKey === "string") {
         setProof(JSON.parse(storedProof));
+        setPublicKey(publicKey);
       }
     }
     fetchData();
@@ -112,14 +114,12 @@ const VerifyProof: React.FC = () => {
 
   const handleVerify = async () => {
     setIsLoading(true);
-
-    const publicKey = await getItemInLocalStorage("publicKey");
     const body = {
       publicWitness: {
         publicInputs: proof.publicInputs,
         verificationKey: proof.verificationKey,
       },
-      publicKey,
+      publicKey: publicKey,
     };
 
     try {
@@ -154,20 +154,18 @@ const VerifyProof: React.FC = () => {
     <BackgroundContainer>
       <ProofContainer>
         {isLoading && <LoadingOverlay>Verifying Proof...</LoadingOverlay>}
-        <Title>Verify Proof</Title>
+        <Title>Bank Proof</Title>
         {proof ? (
           <div>
             <ProofItem>
-              <Label>Public Inputs:</Label>
+              <Label> Customer Information :</Label>
               <JsonDisplay>
                 {JSON.stringify(proof.publicInputs, null, 2)}
               </JsonDisplay>
             </ProofItem>
             <ProofItem>
-              <Label>Public Verification Key:</Label>
-              <JsonDisplay>
-                {JSON.stringify(proof.verificationKey, null, 2)}
-              </JsonDisplay>
+              <Label>Public Key:</Label>
+              <JsonDisplay>{publicKey}</JsonDisplay>
             </ProofItem>
             {verificationResult && (
               <ProofItem>
